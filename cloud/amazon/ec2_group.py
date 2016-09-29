@@ -276,13 +276,13 @@ def main():
         groups[curGroup.id] = curGroup
         if curGroup.name in groups:
             # Prioritise groups from the current VPC
-            if vpc_id is None or curGroup.vpc_id == vpc_id:
+            if curGroup.vpc_id == vpc_id:
                 groups[curGroup.name] = curGroup
         else:
             groups[curGroup.name] = curGroup
 
-        if curGroup.name == name and (vpc_id is None or curGroup.vpc_id == vpc_id):
-            group = curGroup
+    if name in groups:
+        group = groups[name]
 
     # Ensure requested group is absent
     if state == 'absent':
